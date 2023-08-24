@@ -1,0 +1,211 @@
+insert into package values ('package_a', '1', 'document', 'standard');
+insert into package values ('package_b', '3', 'box', 'standard');
+insert into package values ('package_c', '6', 'document', 'standard');
+
+insert into package values ('package_d', '5', 'document', 'express');
+insert into package values ('package_e', '2', 'box', 'express');
+insert into package values ('package_f', '2', 'document', 'express');
+
+insert into package values ('package_g', '3', 'envelope','overnight');
+insert into package values ('package_h', '1', 'envelope', 'overnight');
+
+insert into package values ('package_i', '4', 'parcel','weekend');
+insert into package values ('package_j', '4', 'parcel', 'weekend');
+
+insert into hazardous values ('package_a', 'lighter', 'explosive');
+insert into hazardous values ('package_c', 'mercury', 'toxic');
+insert into hazardous values ('package_e', 'gasoline', 'flammable');
+
+insert into international values ('international_b', 'package_b', 'GUCCI BAG', '1234.56');
+insert into international values ('international_d', 'package_d', 'ROLEX', '2345.67');
+insert into international values ('international_e', 'package_e', 'APPLE', '3456.78');
+
+insert into transportation values ('truck_a', 'truck', 'current_location_1');
+insert into transportation values ('truck_b', 'truck', 'current_location_2');
+insert into transportation values ('truck_c', 'truck', 'current_location_3');
+insert into transportation values ('truck_d', 'truck', 'current_location_4');
+insert into transportation values ('truck_e', 'truck', 'current_location_5');
+insert into transportation values ('truck_f', 'truck', 'current_location_12');
+insert into transportation values ('truck_g', 'truck', 'current_location_13');
+insert into transportation values ('truck_h', 'truck', 'current_location_14');
+insert into transportation values ('truck_i', 'truck', 'current_location_15');
+insert into transportation values ('truck_j', 'truck', 'current_location_16');
+
+insert into transportation values ('ship_a', 'ship', 'current_location_6');
+insert into transportation values ('ship_b', 'ship', 'current_location_7');
+insert into transportation values ('ship_c', 'ship', 'current_location_8');
+
+insert into transportation values ('airplane_a', 'airplane', 'current_location_9');
+insert into transportation values ('airplane_b', 'airplane', 'current_location_10');
+insert into transportation values ('airplane_c', 'airplane', 'current_location_11');
+insert into transportation values ('airplane_d', 'airplane', 'current_location_17');
+
+insert into location values ('private_a', 'private', 'address_1');
+insert into location values ('private_b', 'private', 'address_2');
+insert into location values ('private_c', 'private', 'address_3');
+insert into location values ('private_d', 'private', 'address_4');
+insert into location values ('private_e', 'private', 'address_5');
+
+insert into location values ('port_a', 'port', 'address_6');
+insert into location values ('port_b', 'port', 'address_7');
+insert into location values ('port_c', 'port', 'address_8');
+insert into location values ('port_d', 'port', 'address_9');
+
+insert into location values ('warehouse_a', 'warehouse', 'address_10');
+insert into location values ('warehouse_b', 'warehouse', 'address_11');
+insert into location values ('warehouse_c', 'warehouse', 'address_12');
+insert into location values ('warehouse_d', 'warehouse', 'address_13');
+insert into location values ('warehouse_e', 'warehouse', 'address_14');
+
+insert into customer values ('customer_a', 'name_a', '01000000001', '1234','private_a');
+insert into customer values ('customer_b', 'name_b', '01000000002', '2345','private_b');
+insert into customer values ('customer_c', 'name_c', '01000000003', '4567','private_c');
+insert into customer values ('customer_d', 'name_d', '01000000004', '5678','private_d');
+insert into customer values ('customer_e', 'name_e', '01000000005', '6789','private_e');
+insert into customer values ('customer_f', 'name_f', '01000000006', '5678','private_e');
+insert into customer values ('customer_g', 'name_g', '01000000007', '6789','private_f');
+
+
+insert into service_type_cost values ('level_1', '1');
+insert into service_type_cost values ('level_2', '2');
+insert into service_type_cost values ('level_3', '3');
+
+insert into payment values ('payment_a_1', 'monthly_pay', '2023-05-31 09:00:00', '0','customer_a');
+insert into service values ('d_to_a', '2023-05-17 09:00:00', '2023-05-17 23:00:00','level_3', 'delivered', 'kun', 'payment_a_1', 'customer_d', 'customer_a','package_a');
+insert into locates values ('port_a', 'package_a', '2023-05-17 09:00:00', '2023-05-17 10:00:00');
+insert into carry values ('airplane_a', 'package_a', '2023-05-17 10:00:00', '2023-05-17 15:00:00');
+insert into locates values ('warehouse_b', 'package_a', '2023-05-17 15:00:00', '2023-05-17 17:00:00');
+insert into carry values ('ship_a', 'package_a', '2023-05-17 17:00:00', '2023-05-17 18:00:00');
+insert into locates values ('warehouse_c', 'package_a', '2023-05-17 18:00:00', '2023-05-17 19:00:00');
+insert into carry values ('truck_a', 'package_a', '2023-05-17 19:00:00', '2023-05-17 22:00:00');
+insert into locates values ('private_a', 'package_a', '2023-05-17 22:00:00', '2023-05-17 22:00:00');
+insert into shipment values ('package_a_1', 'airplane_a', 'port_a', 'warehouse_b');
+insert into shipment values ('package_a_2', 'ship_a', 'warehouse_b', 'warehouse_c');
+insert into shipment values ('package_a_3', 'truck_a', 'warehouse_c', 'private_a');
+insert into shipment_track values ('d_to_a', 'package_a_1');
+insert into shipment_track values ('d_to_a', 'package_a_2');
+insert into shipment_track values ('d_to_a', 'package_a_3');
+
+insert into payment values ('payment_b_1', 'credit_card', '2023-05-16 09:00:00', '1','customer_b');
+insert into service values ('c_to_b', '2023-05-17 09:00:00','2023-05-17 19:00:00', 'level_3', 'delivered', 'kun', 'payment_b_1', 'customer_c', 'customer_b','package_b');
+insert into locates values ('port_a', 'package_b', '2023-05-17 09:00:00', '2023-05-17 10:00:00');
+insert into carry values ('airplane_a', 'package_b', '2023-05-17 10:00:00', '2023-05-17 15:00:00');
+insert into locates values ('warehouse_b', 'package_b', '2023-05-17 15:00:00', '2023-05-17 17:00:00');
+insert into carry values ('ship_a', 'package_b', '2023-05-17 17:00:00', '2023-05-17 18:00:00');
+insert into locates values ('warehouse_c', 'package_b', '2023-05-17 18:00:00', '2023-05-17 19:00:00');
+insert into carry values ('truck_b', 'package_b', '2023-05-17 19:00:00', '2023-05-17 21:00:00');
+insert into locates values ('private_b', 'package_b', '2023-05-17 21:00:00', '2023-05-17 21:00:00');
+insert into shipment values ('package_b_1', 'airplane_a', 'port_a', 'warehouse_b');
+insert into shipment values ('package_b_2', 'ship_a', 'warehouse_b', 'warehouse_c');
+insert into shipment values ('package_b_3', 'truck_b', 'warehouse_c', 'private_b');
+insert into shipment_track values ('c_to_b', 'package_b_1');
+insert into shipment_track values ('c_to_b', 'package_b_2');
+insert into shipment_track values ('c_to_b', 'package_b_3');
+
+
+insert into payment values ('payment_c_1', 'monthly_pay', '2023-05-31 09:00:00', '0','customer_c');
+insert into service values ('b_to_c', '2023-05-17 09:00:00','2023-05-17 21:00:00','level_3', 'delivered', 'kun', 'payment_c_1', 'customer_b', 'customer_c','package_c');
+insert into locates values ('port_a', 'package_c', '2023-05-17 09:00:00', '2023-05-17 10:00:00');
+insert into carry values ('airplane_a', 'package_c', '2023-05-17 10:00:00', '2023-05-17 15:00:00');
+insert into locates values ('warehouse_b', 'package_c', '2023-05-17 15:00:00', '2023-05-17 17:00:00');
+insert into carry values ('ship_a', 'package_c', '2023-05-17 17:00:00', '2023-05-17 18:00:00');
+insert into locates values ('warehouse_c', 'package_c', '2023-05-17 18:00:00', '2023-05-17 19:00:00');
+insert into carry values ('truck_c', 'package_c', '2023-05-17 19:00:00', '2023-05-17 20:00:00');
+insert into locates values ('private_c', 'package_c', '2023-05-17 20:00:00', '2023-05-17 20:00:00');
+insert into shipment values ('package_c_1', 'airplane_a', 'port_a', 'warehouse_b');
+insert into shipment values ('package_c_2', 'ship_a', 'warehouse_b', 'warehouse_c');
+insert into shipment values ('package_c_3', 'truck_c', 'warehouse_c', 'private_c');
+insert into shipment_track values ('b_to_c', 'package_c_1');
+insert into shipment_track values ('b_to_c', 'package_c_2');
+insert into shipment_track values ('b_to_c', 'package_c_3');
+
+insert into payment values ('payment_d_1', 'monthly_pay', '2023-05-31 09:00:00', '0','customer_d');
+insert into service values ('b_to_d', '2023-05-17 09:00:00','2023-05-17 23:00:00','level_3', 'delivered', 'song', 'payment_d_1', 'customer_b', 'customer_d','package_d');
+insert into locates values ('port_b', 'package_d', '2023-05-17 09:00:00', '2023-05-17 09:30:00');
+insert into carry values ('airplane_b', 'package_d', '2023-05-17 09:30:00', '2023-05-17 15:00:00');
+insert into locates values ('warehouse_b', 'package_d', '2023-05-17 15:00:00', '2023-05-17 15:30:00');
+insert into carry values ('truck_d', 'package_d', '2023-05-17 15:30:00', '2023-05-17 16:00:00');
+insert into locates values ('private_d', 'package_d', '2023-05-17 22:00:00', '2023-05-17 22:00:00');
+insert into shipment values ('package_d_1', 'airplane_b', 'port_b', 'warehouse_b');
+insert into shipment values ('package_d_2', 'truck_d', 'warehouse_b', 'private_d');
+insert into shipment_track values ('b_to_d', 'package_d_1');
+insert into shipment_track values ('b_to_d', 'package_d_2');
+
+insert into payment values ('payment_e_1', 'credit_card', '2023-05-16 09:00:00', '0','customer_e');
+insert into service values ('c_to_e', '2023-05-17 09:00:00','2023-05-17 22:00:00','level_3', 'delivered', 'song', 'payment_e_1', 'customer_c', 'customer_e','package_e');
+insert into locates values ('port_b', 'package_e', '2023-05-17 09:00:00', '2023-05-17 09:30:00');
+insert into carry values ('airplane_b', 'package_e', '2023-05-17 09:30:00', '2023-05-17 15:00:00');
+insert into locates values ('warehouse_b', 'package_e', '2023-05-17 15:00:00', '2023-05-17 15:30:00');
+insert into carry values ('truck_e', 'package_e', '2023-05-17 15:30:00', '2023-05-17 16:00:00');
+insert into locates values ('private_e', 'package_e', '2023-05-17 21:00:00', '2023-05-17 21:00:00');
+insert into shipment values ('package_e_1', 'airplane_b', 'port_b', 'warehouse_b');
+insert into shipment values ('package_e_2', 'truck_e', 'warehouse_b', 'private_e');
+insert into shipment_track values ('c_to_e', 'package_e_1');
+insert into shipment_track values ('c_to_e', 'package_e_2');
+
+insert into payment values ('payment_a_2', 'monthly_pay', '2023-05-31 09:00:00', '0','customer_a');
+insert into service values ('e_to_a','2023-05-17 09:00:00', '2023-05-17 18:00:00','level_3', 'delivered', 'song', 'payment_a_2', 'customer_e', 'customer_a','package_f');
+insert into locates values ('port_b', 'package_f', '2023-05-17 09:00:00', '2023-05-17 09:30:00');
+insert into carry values ('airplane_b', 'package_f', '2023-05-17 09:30:00', '2023-05-17 15:00:00');
+insert into locates values ('warehouse_b', 'package_f', '2023-05-17 15:00:00', '2023-05-17 15:30:00');
+insert into carry values ('truck_f', 'package_f', '2023-05-17 15:30:00', '2023-05-17 16:00:00');
+insert into locates values ('private_a', 'package_f', '2023-05-17 20:00:00', '2023-05-17 20:00:00');
+insert into shipment values ('package_f_1', 'airplane_b', 'port_b', 'warehouse_b');
+insert into shipment values ('package_f_2', 'truck_f', 'warehouse_b', 'private_a');
+insert into shipment_track values ('e_to_a', 'package_f_1');
+insert into shipment_track values ('e_to_a', 'package_f_2');
+
+insert into payment values ('payment_b_2', 'credit_card', '2023-05-16 09:00:00', '1','customer_b');
+insert into service values ('d_to_b', '2023-05-17 19:00:00','2023-05-18 13:00:00','level_2', 'delivered', 'mee', 'payment_b_2', 'customer_d', 'customer_b','package_g');
+insert into locates values ('port_c', 'package_g', '2023-05-17 19:00:00', '2023-05-17 19:30:00');
+insert into carry values ('airplane_c', 'package_g', '2023-05-17 19:30:00', '2023-05-17 23:00:00');
+insert into locates values ('warehouse_c', 'package_g', '2023-05-17 23:00:00', '2023-05-18 09:30:00');
+insert into carry values ('truck_g', 'package_g', '2023-05-18 09:30:00', '2023-05-18 12:00:00');
+insert into locates values ('private_b', 'package_g', '2023-05-18 12:00:00', '2023-05-18 12:00:00');
+insert into shipment values ('package_g_1', 'airplane_c', 'port_c', 'warehouse_c');
+insert into shipment values ('package_g_2', 'truck_g', 'warehouse_c', 'private_b');
+
+insert into payment values ('payment_c_2', 'monthly_pay', '2023-05-31 09:00:00', '0','customer_c');
+insert into service values ('a_to_c', '2023-05-17 19:00:00','2023-05-18 06:00:00', 'level_2', 'delivered', 'mee', 'payment_c_2', 'customer_a', 'customer_c','package_h');
+insert into locates values ('port_c', 'package_h', '2023-05-17 19:00:00', '2023-05-17 19:30:00');
+insert into carry values ('airplane_c', 'package_h', '2023-05-17 19:30:00', '2023-05-17 23:00:00');
+insert into locates values ('warehouse_c', 'package_h', '2023-05-17 23:00:00', '2023-05-18 09:30:00');
+insert into carry values ('truck_h', 'package_h', '2023-05-18 09:30:00', '2023-05-18 12:00:00');
+insert into locates values ('private_c', 'package_h', '2023-05-18 12:00:00', '2023-05-18 12:00:00');
+insert into shipment values ('package_h_1', 'airplane_c', 'port_c', 'warehouse_c');
+insert into shipment values ('package_h_2', 'truck_h', 'warehouse_c', 'private_c');
+insert into shipment_track values ('a_to_c', 'package_h_1');
+insert into shipment_track values ('a_to_c', 'package_h_2');
+
+insert into payment values ('payment_a_3', 'monthly_pay', '2023-05-31 09:00:00', '0','customer_a');
+insert into service values ('c_to_a', '2023-05-17 19:00:00','2023-05-22 13:00:00','level_1', 'delivered', 'jung', 'payment_a_3', 'customer_c', 'customer_a','package_i');
+insert into locates values ('port_d', 'package_i', '2023-05-19 19:00:00', '2023-05-19 19:30:00');
+insert into carry values ('airplane_d', 'package_i', '2023-05-19 19:30:00', '2023-05-19 23:00:00');
+insert into locates values ('warehouse_d', 'package_i', '2023-05-19 23:00:00', '2023-05-22 09:30:00');
+insert into carry values ('truck_i', 'package_i', '2023-05-22 09:30:00', '2023-05-22 12:00:00');
+insert into locates values ('private_a', 'package_i', '2023-05-22 12:00:00', '2023-05-22 12:00:00');
+insert into shipment values ('package_i_1', 'airplane_d', 'port_d', 'warehouse_d');
+insert into shipment values ('package_i_2', 'truck_i', 'warehouse_d', 'private_a');
+insert into shipment_track values ('c_to_a', 'package_i_1');
+insert into shipment_track values ('c_to_a', 'package_i_2');
+
+insert into payment values ('payment_d_2', 'monthly_pay', '2023-05-31 09:00:00', '0','customer_d');
+insert into service values ('a_to_d', '2023-05-19 19:00:00', '2023-05-22 13:00:00', 'level_1', 'delivered', 'jung', 'payment_d_2', 'customer_a', 'customer_d', 'package_j');
+insert into locates values ('port_d', 'package_j', '2023-05-19 19:00:00', '2023-05-19 19:30:00');
+insert into carry values ('airplane_d', 'package_j', '2023-05-19 19:30:00', '2023-05-19 23:00:00');
+insert into locates values ('warehouse_d', 'package_j', '2023-05-19 23:00:00', '2023-05-22 09:30:00');
+insert into carry values ('truck_j', 'package_j', '2023-05-22 09:30:00', '2023-05-22 12:00:00');
+insert into locates values ('private_d', 'package_j', '2023-05-22 12:00:00', '2023-05-22 12:00:00');
+insert into shipment values ('package_j_1', 'airplane_d', 'port_d', 'warehouse_d');
+insert into shipment values ('package_j_2', 'truck_j', 'warehouse_d', 'private_d');
+insert into shipment_track values ('a_to_d', 'package_j_1');
+insert into shipment_track values ('a_to_d', 'package_j_2');
+
+
+
+
+
+
+
+
+

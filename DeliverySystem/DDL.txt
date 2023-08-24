@@ -1,0 +1,159 @@
+create table package
+	(package_ID		varchar(20),
+	 weight		varchar(20),
+	 package_type		varchar(20),
+     timeline		varchar(20),
+     check (timeline in ('express', 'standard', 'overnight', 'weekend')), 
+     check (package_type in ('document', 'box', 'envelope', 'parcel')),
+	 primary key (package_ID)
+	);
+
+create table hazardous
+	(package_ID		varchar(20),
+	 content		varchar(20),
+	 package_type		varchar(20),
+	 check (package_type in ('flammable', 'toxic', 'explosive')),
+     primary key (package_ID, content),
+	 foreign key (package_ID) references package(package_ID)
+		on delete cascade
+	);
+
+create table international
+	(
+     declaration_ID		varchar(20),
+     package_ID		varchar(20),
+	 content		varchar(20),
+     price		numeric(6,2),
+	 primary key (declaration_ID),
+	 foreign key (package_ID) references package(package_ID)
+		on delete cascade
+	);
+
+create table transportation
+	(transportation_ID		varchar(20), 
+	 transportation_type		varchar(20), 
+     check (transportation_type in ('truck', 'ship', 'airplane')),
+	 current_location		        varchar(20),
+	 primary key (transportation_ID)
+	);
+
+create table location
+	(location_ID		varchar(20), 
+	 location_type		varchar(20), 
+     check (location_type in ('private', 'warehouse', 'port')),
+	 location_address		        varchar(20),
+	 primary key (location_ID)
+	);
+
+create table carry
+	(
+     transportation_ID varchar(20),
+     package_ID varchar(20),
+	 from_when		timestamp, 
+	 to_when		timestamp, 
+	 primary key (transportation_ID, package_ID),
+     foreign key (transportation_ID) references transportation(transportation_ID)
+		on delete cascade,
+	 foreign key (package_ID) references package(package_ID)
+		on delete cascade
+	);
+
+create table locates
+	(
+     location_ID varchar(20),
+     package_ID varchar(20),
+	 from_when timestamp,
+     to_when   timestamp,
+	 primary key (location_ID, package_ID),
+     foreign key (location_ID) references location(location_ID)
+		on delete cascade,
+	 foreign key (package_ID) references package(package_ID)
+		on delete cascade
+	);
+
+create table shipment
+	(
+     shipment_ID 			varchar(20),
+     transportation_ID   	varchar(20),
+	 location_ID_from 		varchar(20),
+     location_ID_to   		varchar(20),
+	 primary key (shipment_ID),
+     foreign key (location_ID_from) references location(location_ID)
+		on delete cascade,
+     foreign key (location_ID_to) references location(location_ID)
+		on delete cascade,   
+	 foreign key (transportation_ID) references transportation(transportation_ID)
+		on delete cascade
+	);
+
+
+create table customer
+	(
+    customer_ID 	varchar(20),
+    name			varchar(20),
+	phone_number	numeric(11,0),
+    account_number	numeric, 
+	customer_address 	varchar(20),
+	primary key (customer_ID)
+	);
+
+create table payment
+	(
+    payment_ID 		varchar(20),
+    payment_type	varchar(20),
+    check (payment_type in ('monthly_pay', 'credit_card')),
+	payment_time	timestamp,
+    prepaid			numeric, 
+	customer_ID 	varchar(20),
+    primary key (payment_ID),
+    foreign key (customer_ID) references customer(customer_ID)
+		on delete cascade
+	);
+create table service_type_cost
+	(
+	service_type varchar(20),
+	check (service_type in ('level_1', 'level_2', 'level_3')), 
+    service_cost numeric,
+    check (service_cost in ('1', '2', '3')),
+    primary key (service_type)
+    );
+    
+create table service
+	(
+	 service_ID				varchar(20), 
+	 service_date			varchar(20),
+	 promised_time			timestamp,
+	 service_type			varchar(20),
+     check (service_type in ('level_1', 'level_2', 'level_3')), 
+	 status					varchar(20),
+     check (status in ('delivered', 'delivering', 'preparing')), 
+     service_manager		varchar(20),
+	 payment_ID				varchar(20),
+	 customer_ID_sender		varchar(20),
+	 customer_ID_reciever	varchar(20),
+     package_ID				varchar(20),
+	 primary key (service_ID),
+	 foreign key (payment_ID) references payment (payment_ID)
+		on delete cascade,
+	 foreign key (customer_ID_sender) references customer(customer_ID)
+		on delete cascade,
+	foreign key (customer_ID_reciever) references customer(customer_ID)
+		on delete cascade,        
+	foreign key (service_type) references service_type_cost(service_type),
+	foreign key (package_ID) references package(package_ID)
+		on delete cascade
+    );
+    
+
+create table shipment_track
+	(
+     service_ID 			varchar(20),
+     shipment_ID 		  	varchar(20),
+     
+	 primary key (service_ID, shipment_ID),
+     foreign key (service_ID) references service(service_ID)
+		on delete cascade,   
+	 foreign key (shipment_ID) references shipment(shipment_ID)
+		on delete cascade
+	);
+
